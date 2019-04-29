@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+    <head>
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <![endif]-->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta description="Notre application vous permet de réserver un vélib sur la ville de Lyon pour une durée de 2 min... Comme ça vous êtes sûr d'y trouver votre vélo une fois sur place! Alors PROFITEZ-EN!">
+
+        <title>velib Lyon</title>
+
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+        <header>
+            <!-- ////////////////////////////////// SLIDER ///////////////////////////////// -->
+        <ul id="slideBox">
+            <li id="slide1" class="slide-default">
+                <div class="packSlide">
+                    <div class="iconSlideLeft"><img src="images/btnLeft.png" alt="icon velo fleche"></div>
+                    <div class="block">
+                        <div class="textSlide"><p>Bonjour et Bienvenue, <br>Avant tout, Il faut choisir la station la plus proche de l'endroit où vous êtes dans laquelle vous voulez réserver ton vélo en cliquant sur un des marqueurs qu'il y a sur la carte de la ville! (un peu plus bas)</p></div>
+                        <div class="imageSlideRight"><img src="images/1.jpg" alt="map with marks"></div>
+                    </div>
+                    <div class="iconSlideRight"><img src="images/btnRight.png" alt="icon velo fleche"></div>
+                </div>
+            </li>
+            <li id="slide2" class="slide-default" style="display: none">
+                <div class="packSlide">
+                    <div class="iconSlideLeft"><img src="images/btnLeft.png" alt="icon velo fleche"></div>
+                    <div class="block">
+                        <div class="textSlide"><p>Une fois la station choisie, les infos la concernant apparaissent dans une fenêtre à droite de la carte, vous n'avez plus qu'à signer et valider pour réserver votre vélo! <br>(S'il y en a de disponible(s) bien sûr!)</p></div>
+                        <div class="imageSlideRight"><img src="images/2.png" alt="fenetre infos velib"></div>
+                    </div>
+                    <div class="iconSlideRight"><img src="images/btnRight.png" alt="icon velo fleche"></div>
+                </div>
+            </li>
+            <li id="slide3" class="slide-default" style="display: none">
+                <div class="packSlide">
+                    <div class="iconSlideLeft"><img src="images/btnLeft.png" alt="icon velo fleche"></div>
+                    <div class="block">
+                        <div class="textSlide"><p>Une fois réservé (les infos sur votre réservation sont en bas de cette page), votre vélo vous attend dans la station que vous avez choisi! Vous avez 20 minutes pour aller le récupérer. Dépassé ce délai, vous devrez effectuer une nouvelle réservation.</p></div>
+                        <div class="imageSlideRight"><img src="images/3.jpg" alt="velib"></div>
+                    </div>
+                    <div class="iconSlideRight"><img src="images/btnRight.png" alt="icon velo fleche"></div>
+                </div>
+            </li>
+            <li id="slide4" class="slide-default" style="display: none">
+                <div class="packSlide">
+                    <div class="iconSlideLeft"><img src="images/btnLeft.png" alt="icon velo fleche"></div>
+                    <div class="block">
+                        <div class="textSlide"><p>N'oubliez pas de ramener votre vélo dans l'état où vous l'avez pris. Il est essentiel pour le bien de tous de prendre soin du matériel commun. Nous entretenons les vélos que vous utilisez alors soyez respectueux et faites de même... Merci!</p></div>
+                        <div class="imageSlideRight"><img src="images/4.jpg" alt="velib"></div>
+                    </div>
+                    <div class="iconSlideRight"><img src="images/btnRight.png" alt="icon velo fleche"></div>
+                </div>
+            </li>
+
+        </ul>
+        </header>
+
+        <section id="welcome">
+
+            <h1>Les Stations de vélib de Lyon</h1>
+            <h2>Bienvenue sur VEL0'V</h2>
+            <p>Toutes les instructions pour vous permettre de réserver votre vélo dans une des stations vélib de Lyon sont contenues dans le slide qui défile en haut de la page. Vous pouvez, à tout moment, décider de stopper le défilement pour prendre le temps de comprendre notre fonctionnement (si simple!) en appuyant sur la touche "DROITE" ou "GAUCHE" de votre clavier et vous pouvez les faire défiler manuellement avec ces mêmes touches! (pratique!!!)</p>
+
+        </section>
+
+        <section>
+            <!-- ////////////////////////////////// PAGE ///////////////////////////////// -->
+              <ul id = "boddy">
+                  <li id="infosWindow">
+                        <ul id="data">
+                            <li class="dataStation"><p class="dataLabel">Numéro et nom de la station : </p><p id="nameStation" class="data"></p></li>
+                            <li class="dataStation"><p class="dataLabel">Adresse de la station : </p><p id="adressStation" class="data"></p></li>
+                            <li class="dataStation"><p class="dataLabel">Etat de la station : </p><p id="statusStation" class="data"></p></li>
+                            <div class="stats">
+                                <li class="dataStation"><p class="dataLabel">Emplacement(s): </p><p id="availableBikeStands" class="data"></p></li>
+                                <li class="dataStation"><p class="dataLabel">Total de vélos: </p><p id="bikeStands" class="data"></p></li>
+                                <li class="dataStation"><p class="dataLabel">Vélo(s) disponible(s) : </p><p id="availableBikes" class="data"></p></li>
+                                <li class="dataStation"><p class="dataLabel">Borne automatique de payement : </p><p id="banking" class="data"></p></li>
+                            </div>
+                           <!-- //////////////// CANVAS ////////////////////////// -->
+                        </ul>
+                      <div id="validStation">
+                            <p id="tutoCanvas">Signez dans le cadre blanc ci-dessous et validez pour pouvoir réserver un vélo.</p>
+                            <ul id="resaConfirm">
+                                <li><input type="reset" id="reset" value="Effacer"/></li>
+                                <li><canvas id="canvas" width="200" height="150"></canvas></li>
+                                <li><input type="button" id="valid" value="Valider"/></li>
+                            </ul>
+                            <input id="resaBtn" type="button" value="Je réserve mon vélo!">
+                            <div id="messOK"><p>Bravo! Vous venez de réserver votre vélo! Toutes les infos sur votre réservation sont en bas de cette page.</p></div>
+                            <div id="messEmptyCanvas"><p>Signez dans le rectangle blanc ci-dessus afin de pouvoir réserver votre vélo!</p></div>
+                      </div>
+                      <div id="messFail"><p>Désolé mais cette station n'est pas disponible pour le moment.</p></div>
+                  </li>
+                  <li id="map"></li>
+              </ul>
+
+        </section>
+        <div id="mentions"><p>MENTIONS LEGALES: Ce site n'est pas officiel, c'est une démonstration et il ne contient rien de contractuel.</p></div>
+        <footer>
+            <div id="timeOut" class="infosFooter">Désolé mais votre réservation a expiré. Reservez un autre vélo. Merci!</div>
+            <!-- ////////////////////////////////// INFOS FOOTER ///////////////////////////////// -->
+
+            <div id="infosReservStoked">
+                <div id="time">
+                    <p>Il vous reste : </p>
+                    <p id="chrono"></p>
+                    <p> minutes pour récupérer votre vélo!</p>
+                </div>
+                <div id="infosName" class="infosStation">
+                    <p class="infosFooter">votre vélo est réservé à la station :&nbsp; </p><p id="infosNameData" class="infosFooter data"></p>
+                </div>
+                <div id="infosAdress" class="infosStation">
+                    <p class="infosFooter">A cette adresse :&nbsp; </p><p id="infosAdressData" class="infosFooter data"></p>
+                </div>
+                <div id="infosBikeStands" class="infosStation">
+                    <p class="infosFooter">La station peut contenir jusqu'à :&nbsp;</p><p id="infosBikeStandsData" class="infosFooter data"></p><p class="infosFooter">&nbsp;vélos.</p>
+                </div>
+                <div id="infosAvailableBikeStands" class="infosStation">
+                    <p class="infosFooter">Il reste :&nbsp;</p><p id="infosAvailableBikeStandsData" class="infosFooter data"></p><p class="infosFooter">&nbsp;emplacement(s) libre(s) pour y ramener votre vélo (pour le moment...).</p>
+                </div>
+                <div id="infosAvailableBikes" class="infosStation">
+                    <p class="infosFooter"> Il reste :&nbsp;</p><p id="infosAvailableBikesData" class="infosFooter data"></p><p class="infosFooter">&nbsp;vélos disponible(s).</p>
+                </div>
+                <div id="infosBanking" class="infosStation">
+                    <p class="infosFooter"> Borne de payement automatique :&nbsp;</p><p id="infosBankingData" class="infosFooter data"></p>
+                </div>
+
+            </div>
+            <div id="copyright">
+                <ul>
+                    <li><p>Réalisé par:<br> <a target="_blank" href="http://www.adn.thais-kevin.club">ADN</a> <br>Artisan Développeur du Net</p></li>
+                </ul>
+            </div>
+        </footer>
+        <!-- ////////////////////////////////// SCRIPTS JS + API GOOGLE MAP ///////////////////////////////// -->
+
+        <script type="text/javascript" src="js/slide.js"></script>
+        <script type="text/javascript" src="js/infoWindow.js"></script>
+        <script type="text/javascript" src="js/mark.js"></script>
+        <script type="text/javascript" src="js/station.js"></script>
+        <script type="text/javascript" src="js/canvas.js"></script>
+        <script type="text/javascript" src="js/reservation.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRyShECCfFjCKYYBS437WiL3NbmLr7O1g&callback=initMap" async defer></script>
+    </body>
+
+</html>
